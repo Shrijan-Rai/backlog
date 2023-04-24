@@ -4,11 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,9 +46,16 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_setting -> replaceFragment(SettingFragment(),it.title.toString())
             R.id.nav_message1 -> replaceFragment(MessageFragment(),it.title.toString())
            // R.id.nav_share -> replaceFragment(HomeFragm,it.title.toString())
-            R.id.nav_login->{
+            R.id.nav_logOut->{
+
+                FirebaseAuth.getInstance().signOut()
+
+//                val clickableArea = navView.findViewById<ListView>(R.id.nav_logOut)
+//                clickableArea.setOnClickListener{
+//                val intent = Intent(this, SignInActivity::class.java)
+//                startActivity(intent)}
                 // Handle settings action
-                startActivity(Intent(this, SignInActivity::class.java))
+                startActivity(Intent(applicationContext, SignInActivity::class.java))
                 true
             }
 

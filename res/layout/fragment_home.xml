@@ -7,13 +7,100 @@
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        android:layout_gravity="center"
-        android:textColor="@color/black"
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Home"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:textColor="@color/black"-->
 
-        />
+<!--        />-->
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        tools:context=".MainActivity">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:letterSpacing="0.2"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/selTerm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="10sp"
+            android:text="Select Your Term"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:letterSpacing="0.1" />
+
+        <Spinner
+            android:id="@+id/term"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp" />
+
+        <TextView
+            android:id="@+id/selSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Your Subject Below : "
+            android:textSize="20sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:letterSpacing="0.1"/>
+
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:paddingStart="20sp"
+            android:paddingEnd="10sp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/border"/>
+
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingStart="10dp"
+            android:layout_marginStart="30dp"
+            android:text="Are you sure?" />
+
+        <Button
+            android:id="@+id/payBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="40dp"
+            android:text="Proceed to payment" />
+
+    </LinearLayout>
 
 </FrameLayout>
