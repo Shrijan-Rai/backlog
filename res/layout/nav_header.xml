@@ -22,9 +22,12 @@
         android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
+        android:id="@+id/gmail"
         android:layout_height="wrap_content"
+        android:text="sam@gmail.com"
         android:textSize="16dp"
-        android:text="shrijan@gmail.com"/>
+
+        />
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"

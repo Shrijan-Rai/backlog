@@ -5,55 +5,72 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MessageFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class MessageFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var database: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
+    private lateinit var listener: ValueEventListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false)
+        val v: View = inflater.inflate(R.layout.fragment_message, container, false)
+        database = FirebaseDatabase.getInstance()
+        myRef = database.getReference("Users")
+
+        // Add a listener to fetch data from the database
+        listener = myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // This method will be called whenever the data at the specified database reference changes.
+                // You can access the data using the snapshot parameter.
+                val data = snapshot.getValue(Users::class.java)
+
+                // Display the fetched data in the XML layout
+                displayData(data)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // This method will be called if there is an error while reading the data.
+                // You can handle the error here.
+            }
+        })
+        return v
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MessageFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MessageFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Remove the listener to avoid any memory leaks
+        myRef.removeEventListener(listener)
     }
+
+    private fun displayData(data: Users?) {
+        // Inflate the layout file
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_message, null)
+
+        // Get references to the TextView elements
+        val nameTextView = view.findViewById<TextView>(R.id.nameTextView)
+        val ageTextView = view.findViewById<TextView>(R.id.courseTextView)
+        val emailTextView = view.findViewById<TextView>(R.id.courseCodeTextView)
+
+        // Set the values of the TextView elements with the fetched data
+        nameTextView.text = data?.name
+        ageTextView.text = "Course ${data?.course}"
+        emailTextView.text = "Course Code: ${data?.courseCode}"
+
+        // Add the view to the activity
+        val container = view.findViewById<LinearLayout>(R.id.linear)
+        container.addView(view)
+
+    }
+
 }
